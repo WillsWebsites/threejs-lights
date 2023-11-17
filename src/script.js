@@ -38,6 +38,7 @@ scene.add(rectAreaLight)
 
 const spotLight = new THREE.SpotLight(0x78ff00, 4.5, 10, Math.PI * 0.1, 0.25, 1)
 scene.add(spotLight)
+pointLight.castShadow = true
 
 /**
  * Objects
@@ -49,8 +50,10 @@ material.roughness = 0.4
 // Objects
 const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), material)
 sphere.position.x = -1.5
+sphere.castShadow = true
 
 const cube = new THREE.Mesh(new THREE.BoxGeometry(0.75, 0.75, 0.75), material)
+cube.castShadow = true
 
 const torus = new THREE.Mesh(new THREE.TorusGeometry(0.3, 0.2, 32, 64), material)
 torus.position.x = 1.5
@@ -58,6 +61,7 @@ torus.position.x = 1.5
 const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), material)
 plane.rotation.x = -Math.PI * 0.5
 plane.position.y = -0.65
+plane.receiveShadow = true
 
 scene.add(sphere, cube, torus, plane)
 
@@ -105,6 +109,7 @@ const renderer = new THREE.WebGLRenderer({
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+renderer.shadowMap.enabled = true
 
 /**
  * Animate
